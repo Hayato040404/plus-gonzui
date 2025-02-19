@@ -4,48 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>その他資料</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eef2f7; }
-        header { background: #0073e6; color: white; padding: 1.5rem; text-align: center; font-size: 1.5rem; }
-        nav { display: flex; justify-content: center; background: #005bb5; padding: 0.5rem; gap: 10px; }
-        nav a { color: white; text-decoration: none; padding: 1rem; font-weight: bold; transition: 0.3s; }
-        nav a:hover { background: #004494; border-radius: 5px; }
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        input, button { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #0073e6; color: white; cursor: pointer; }
-        button:hover { background: #005bb5; }
-        .document-list { margin-top: 20px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>📂 その他資料</h1>
-    </header>
+    <header>その他資料</header>
     <nav>
         <a href="home.html">🏠 ホーム</a>
-        <a href="chat.html">💬 チャットルーム</a>
+        <a href="chat.html">💬 チャット</a>
         <a href="class.html">📅 時間割</a>
+        <a href="documents.html">📂 その他資料</a>
         <a href="index.html">🔑 ログアウト</a>
     </nav>
-    <div class="container">
-        <h2>資料を追加</h2>
-        <input type="text" id="docTitle" placeholder="資料のタイトル">
-        <input type="url" id="docUrl" placeholder="資料のURLを入力">
+    <main>
+        <h2>資料の追加</h2>
+        <input type="text" id="docTitle" placeholder="資料名">
+        <input type="url" id="docUrl" placeholder="URLを入力">
         <button onclick="addDocument()">追加</button>
-        <h2>📄 資料一覧</h2>
-        <div class="document-list" id="documentList"></div>
-    </div>
+        <h3>資料一覧</h3>
+        <ul id="docList"></ul>
+    </main>
+
     <script>
         function addDocument() {
-            const title = document.getElementById('docTitle').value;
-            const url = document.getElementById('docUrl').value;
+            let title = document.getElementById("docTitle").value;
+            let url = document.getElementById("docUrl").value;
             if (title && url) {
-                const documentList = document.getElementById('documentList');
-                const newItem = document.createElement('p');
-                newItem.innerHTML = `<a href="${url}" target="_blank">${title}</a>`;
-                documentList.appendChild(newItem);
-                document.getElementById('docTitle').value = '';
-                document.getElementById('docUrl').value = '';
+                let li = document.createElement("li");
+                let a = document.createElement("a");
+                a.href = url;
+                a.innerText = title;
+                a.target = "_blank";
+                li.appendChild(a);
+                document.getElementById("docList").appendChild(li);
+                document.getElementById("docTitle").value = "";
+                document.getElementById("docUrl").value = "";
             }
         }
     </script>
