@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>クラス掲示板 - ログイン</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eef2f7; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .login-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center; }
-        input, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #0073e6; color: white; border: none; cursor: pointer; }
-        button:hover { background: #005bb5; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="login-container">
@@ -21,51 +15,45 @@
         <p id="error" style="color: red;"></p>
     </div>
 
-    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.8); color: white; text-align: center; padding: 10px; display: none;">
-        本サイトではCookieを使用し、ログイン状態を維持します。
-        <button onclick="acceptCookies()" style="margin-left: 10px; padding: 5px 10px; background: #28a745; color: white; border: none;">同意する</button>
-    </div>
-
     <script>
-        function setCookie(name, value, days) {
-            let date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
-        }
-
+        // Cookieの取得関数
         function getCookie(name) {
-            let cookies = document.cookie.split('; ');
-            for (let cookie of cookies) {
-                let [key, value] = cookie.split('=');
-                if (key === name) return value;
-            }
-            return null;
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? match[2] : null;
         }
 
-        function acceptCookies() {
-            setCookie("cookieConsent", "true", 365);
-            document.getElementById("cookie-banner").style.display = "none";
+        // すでにログインしている場合、自動ログイン
+        if (getCookie("loggedIn") === "true") {
+            window.location.href = 'home.html';
         }
 
         function login() {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
             if (user === 'j1d2024' && pass === '20240401') {
-                setCookie("loggedIn", "true", 3);
+                document.cookie = "loggedIn=true; max-age=" + (3 * 24 * 60 * 60) + "; path=/";
                 window.location.href = 'home.html';
             } else {
                 document.getElementById('error').innerText = 'ユーザー名またはパスワードが違います。';
             }
         }
-
-        window.onload = function () {
-            if (!getCookie("cookieConsent")) {
-                document.getElementById("cookie-banner").style.display = "block";
-            }
-            if (getCookie("loggedIn") === "true") {
-                window.location.href = 'home.html';
-            }
-        }
     </script>
 </body>
 </html>
+<div id="cookie-banner">
+    本サイトではCookieを使用しています。続行する場合は「同意」をクリックしてください。
+    <button onclick="acceptCookies()">同意</button>
+</div>
+
+<script>
+    function acceptCookies() {
+        document.cookie = "cookieConsent=true; max-age=" + (30 * 24 * 60 * 60) + "; path=/";
+        document.getElementById("cookie-banner").style.display = "none";
+    }
+
+    window.onload = function() {
+        if (!document.cookie.includes("cookieConsent=true")) {
+            document.getElementById("cookie-banner").style.display = "block";
+        }
+    }
+</script>
