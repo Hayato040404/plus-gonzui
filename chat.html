@@ -3,36 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>チャットルーム</title>
+    <title>チャット</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>チャットルーム</header>
-    <nav>
-        <a href="home.html">🏠 ホーム</a>
-        <a href="chat.html">💬 チャット</a>
-        <a href="class.html">📅 時間割</a>
-        <a href="documents.html">📂 その他資料</a>
-        <a href="index.html">🔑 ログアウト</a>
-    </nav>
     <main>
+        <div id="chat-box"></div>
         <input type="text" id="message" placeholder="メッセージを入力">
         <button onclick="sendMessage()">送信</button>
-        <div id="chat"></div>
     </main>
-
-    <script>
-        function sendMessage() {
-            let msg = document.getElementById("message").value;
-            if (msg) {
-                let chatBox = document.getElementById("chat");
-                let p = document.createElement("p");
-                p.className = "message";
-                p.innerText = msg;
-                chatBox.appendChild(p);
-                document.getElementById("message").value = "";
-            }
-        }
-    </script>
 </body>
 </html>
