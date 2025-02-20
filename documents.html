@@ -3,43 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>その他資料</title>
+    <title>資料ページ</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>その他資料</header>
-    <nav>
-        <a href="home.html">🏠 ホーム</a>
-        <a href="chat.html">💬 チャット</a>
-        <a href="class.html">📅 時間割</a>
-        <a href="documents.html">📂 その他資料</a>
-        <a href="index.html">🔑 ログアウト</a>
-    </nav>
-    <main>
-        <h2>資料の追加</h2>
-        <input type="text" id="docTitle" placeholder="資料名">
-        <input type="url" id="docUrl" placeholder="URLを入力">
-        <button onclick="addDocument()">追加</button>
-        <h3>資料一覧</h3>
-        <ul id="docList"></ul>
-    </main>
-
-    <script>
-        function addDocument() {
-            let title = document.getElementById("docTitle").value;
-            let url = document.getElementById("docUrl").value;
-            if (title && url) {
-                let li = document.createElement("li");
-                let a = document.createElement("a");
-                a.href = url;
-                a.innerText = title;
-                a.target = "_blank";
-                li.appendChild(a);
-                document.getElementById("docList").appendChild(li);
-                document.getElementById("docTitle").value = "";
-                document.getElementById("docUrl").value = "";
-            }
-        }
-    </script>
+    <input type="text" id="doc-url" placeholder="URLを入力">
+    <button onclick="addDocument()">追加</button>
+    <ul id="doc-list"></ul>
 </body>
 </html>
