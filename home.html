@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>クラス掲示板</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>クラス掲示板</header>
-    <nav>
+    <header>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <h1>クラス掲示板</h1>
+        <p id="user-info"></p>
+    </header>
+    <nav id="menu">
         <a href="home.html">🏠 ホーム</a>
         <a href="chat.html">💬 チャット</a>
         <a href="class.html">📅 時間割</a>
         <a href="documents.html">📂 その他資料</a>
-        <a href="index.html">🔑 ログアウト</a>
+        <a href="checklist.html">📖 確認事項</a>
+        <a href="index.html" onclick="logout()">🔑 ログアウト</a>
     </nav>
-    <main>
-        <h2>お知らせ</h2>
-        <p>クラスのお知らせを掲載します。</p>
-    </main>
 </body>
 </html>
